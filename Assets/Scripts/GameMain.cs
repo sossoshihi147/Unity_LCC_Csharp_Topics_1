@@ -55,7 +55,7 @@ namespace OLIVER
         { "吃掉", "丟掉", "給爸爸吃" },                         // 事件 1 的三個按鈕文本
         { "答應她", "回絕她", "套路她" },                       // 事件 2 的三個按鈕文本
         { "起身尋找", "呼呼大睡", "叫他別吵" },                 // 事件 3 的三個按鈕文本
-        { "出國念書\n金錢需>4000", "出國玩", "不想出國" },     　// 事件 4 的三個按鈕文本
+        { "出國念書\n金錢需>3500", "出國玩", "不想出國" },     　// 事件 4 的三個按鈕文本
         { "收養牠", "請人幫忙", "無視" },                    　 // 事件 5 的三個按鈕文本
         { "答應他", "回絕他", "要朋友一起" },                   // 事件 6 的三個按鈕文本
         { "回應他", "卸載他", "上網公開" }                   　 // 事件 7 的三個按鈕文本
@@ -63,12 +63,12 @@ namespace OLIVER
         [SerializeField] public CharacterStats stats;
         private void Awake()
         {
-            LogSystem.LogWithColor("恭喜你終於破防了，精生也請多多指教!!", "#f0f");
             Born();
         }
         // 出生
         private void Born()
         {
+            LogSystem.LogWithColor("恭喜你終於破防了，精生也請多多指教!!", "#f0f");
             int randomStart = Random.Range(0, 4);
             if (randomStart == 0)
             {
@@ -393,15 +393,15 @@ namespace OLIVER
                 #endregion
 
                 case "Event1":
-                    int randomEvent = EventRandom();
-                    if (ageCheck == 1 && randomEvent <= 2)
+                    int randomEvent1 = EventRandom();
+                    if (ageCheck == 1 && randomEvent1 <= 2)
                     {
                         LogSystem.LogWithColor("判定成功", "#f00");
                         LogSystem.LogWithColor("吃下後突然頭痛欲裂，接連發了好幾天的燒，醒來後頭腦都不清楚了<<能力-5，健康-15>>", "#0ff");
                         stats.ModifyStat("ability", -5);
                         stats.ModifyStat("health", -15);
                     }
-                    else if (ageCheck == 1 && randomEvent > 2)
+                    else if (ageCheck == 1 && randomEvent1 > 2)
                     {
                         LogSystem.LogWithColor("判定失敗", "#f00");
                         LogSystem.LogWithColor("吃下後眼前變的五光十射，腦袋微微發熱，學習突飛猛進\n" +
@@ -422,8 +422,18 @@ namespace OLIVER
                         stats.ModifyStat("sociability", -10);
                         stats.ModifyStat("money", -500);
                     }
+                    else if (ageCheck == 4 && stats.money > 3500)
+                    {
+                        LogSystem.LogWithColor("這一年爸媽送你到英國留學，欣賞了大笨鐘增廣見聞\n" +
+                            "增進了不少技能外也交到很多異國朋友，但食物真是不怎麼合胃口", "#0ff");
+                        LogSystem.LogWithColor("<<能力+15，社交+15，金錢-3000>>", "#0ff");
+                        stats.ModifyStat("ability", 15);
+                        stats.ModifyStat("sociability", 15);
+                        stats.ModifyStat("money", -3000);
+                    }
                     break;
                 case "Event2":
+                    int randomEvent2 = EventRandom();
                     if (ageCheck == 1)
                     {
                         LogSystem.LogWithColor("糖果被丟棄到地上時又觸發了黑洞，把地板整了一個大洞\n從此幼兒園開始瀰漫著關於你的怪談<<社交-10>>", "#0ff");
@@ -432,8 +442,8 @@ namespace OLIVER
                     else if (ageCheck == 2)
                     {
                         LogSystem.LogWithColor("你回答她:「你想嚇我是嚇不倒的，我什麼都怕就是不怕鬼」\n" +
-                            "結果她愣了一秒之後，撲過來把你爆抓一頓，醒來後發現你也渾身是抓傷，家裡的貓也不見了\n" +
-                            "媽媽以為是你打跑了牠<<健康-5，金錢-200>>", "#0ff");
+                            "結果她愣了一秒之後，撲過來把你爆抓一頓，醒來後發現你也渾身是抓傷，家裡的貓也不見了", "#0ff");
+                        LogSystem.LogWithColor("媽媽以為是你打跑了牠 <<健康-5，金錢-200>>", "#0ff");
                         stats.ModifyStat("health", -5);
                         stats.ModifyStat("money", -200);
                     }
@@ -444,6 +454,25 @@ namespace OLIVER
                         stats.ModifyStat("ability", 10);
                         stats.ModifyStat("health", 10);
                         stats.ModifyStat("money", -300);
+                    }
+                    else if (ageCheck == 4 && randomEvent2 <= 4)
+                    {
+                        LogSystem.LogWithColor("判定成功", "#f00");
+                        LogSystem.LogWithColor("全家來到了京都，在古寺及竹林中陶冶身心\n" +
+                            "還去了一趟有馬泡了溫泉，是一趟滿滿的療癒之旅<<能力+5，健康+15，金錢-800>>", "#0ff");
+                        stats.ModifyStat("ability", 5);
+                        stats.ModifyStat("health", 15);
+                        stats.ModifyStat("money", -800);
+                    }
+                    else if (ageCheck == 4 && randomEvent2 > 4)
+                    {
+                        LogSystem.LogWithColor("判定失敗", "#f00");
+                        LogSystem.LogWithColor("你選擇去泰國旅遊，感受一下熱帶風情\n" +
+                            "一下飛機就立馬被搭訕，正以為美夢開始，結果被騙到豬仔園區!!!命喪於此!!!", "#0ff");
+                        LogSystem.LogWithColor("投胎囉~~~", "#ff0");
+                        Born();
+                        stats.ModifyStat("age", -1);
+                        stats.ModifyStat("health", 1);
                     }
                     break;
                 case "Event3":
@@ -458,51 +487,73 @@ namespace OLIVER
                             "醒來後發現家裡的貓貓變的更黏你了，你的人緣也變好<<社交+10>>", "#0ff");
                         stats.ModifyStat("sociability", 10);
                     }
+                    else if (ageCheck == 3)
+                    {
+                        LogSystem.LogWithColor("迷:「罷了罷了，現在的年輕人，唉...健康的生活吧」\n" +
+                            "<<健康+5，金錢-300>>", "#0ff");
+                        stats.ModifyStat("health", 5);
+                        stats.ModifyStat("money", -300);
+                    }
+                    else if (ageCheck == 4)
+                    {
+                        LogSystem.LogWithColor("爸媽覺得你是不想為家裡增添負擔，感到欣慰\n" +
+                            "他們用出國的費用，給你買了一輛最新款Aphone，讓你在朋友圈裡拉風一波<<社交+5，金錢+300>>", "#0ff");
+                        stats.ModifyStat("sociability", 5);
+                        stats.ModifyStat("money", 300);
+                    }
                     break;
             }
-            Gourp();
-            float ageCheck2 = stats.age / 4;
-            // 特殊事件開場白
-            switch (ageCheck2)
+            string eventCheck = eventName;
+            if (ageCheck == 4 && stats.money < 3500 && eventName == "Event1")
             {
-                case 1:
-                    LogSystem.LogWithColor("在幼兒園吃完點心，打了個飽嗝\n" +
-                    "突然面前出現一個黑洞並掉落一顆糖果\n包裝上的字有看沒有懂，你會?", "#ff0");
-                    ChangeEvent(0);
-                    break;
-                case 2:
-                    LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
-                     "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」\n" +
-                     "仔細一看他的服裝配色與家裡的貓貓一般無二，你會?", "#ff0");
-                    ChangeEvent(1);
-                    break;
-                case 3:
-                    LogSystem.LogWithColor("國小畢旅回來後，莫名生了一場大病，高燒住院\n" +
-                    "在病床上，迷迷糊糊中隱約聽見一股呼喚，你會?", "#ff0");
-                    ChangeEvent(2);
-                    break;
-                case 4:
-                    LogSystem.LogWithColor("今年元旦，爸媽興奮的告訴你要送你一份禮物\n" +
-                    "問你想不想出國，你會?", "#ff0");
-                    ChangeEvent(3);
-                    break;
-                case 5:
-                    LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
-                    "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」，你會?", "#ff0");
-                    ChangeEvent(4);
-                    break;
-                case 6:
-                    LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
-                    "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」，你會?", "#ff0");
-                    ChangeEvent(5);
-                    break;
-                case 7:
-                    LogSystem.LogWithColor("某天，你發現你手機裡的AI助手越來越智能\n" +
-                    "並且在你生日的當天主動與你傳訊，你會?", "#ff0");
-                    ChangeEvent(6);
-                    break;
+                LogSystem.LogWithColor("不好意思你的錢不太夠，請選擇其他選項", "#f33");
             }
-            UpdateUI();
+            else
+            {
+                Gourp();
+                float ageCheck2 = stats.age / 4;
+                // 特殊事件開場白
+                switch (ageCheck2)
+                {
+                    case 1:
+                        LogSystem.LogWithColor("在幼兒園吃完點心，打了個飽嗝\n" +
+                        "突然面前出現一個黑洞並掉落一顆糖果\n包裝上的字有看沒有懂，你會?", "#ff0");
+                        ChangeEvent(0);
+                        break;
+                    case 2:
+                        LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
+                         "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」\n" +
+                         "仔細一看他的服裝配色與家裡的貓貓一般無二，你會?", "#ff0");
+                        ChangeEvent(1);
+                        break;
+                    case 3:
+                        LogSystem.LogWithColor("國小畢旅回來後，莫名生了一場大病，高燒住院\n" +
+                        "在病床上，迷迷糊糊中隱約聽見一股呼喚，你會?", "#ff0");
+                        ChangeEvent(2);
+                        break;
+                    case 4:
+                        LogSystem.LogWithColor("今年元旦，爸媽興奮的告訴你要送你一份禮物\n" +
+                        "問你想不想出國，你會?", "#ff0");
+                        ChangeEvent(3);
+                        break;
+                    case 5:
+                        LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
+                        "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」，你會?", "#ff0");
+                        ChangeEvent(4);
+                        break;
+                    case 6:
+                        LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
+                        "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」，你會?", "#ff0");
+                        ChangeEvent(5);
+                        break;
+                    case 7:
+                        LogSystem.LogWithColor("某天，你發現你手機裡的AI助手越來越智能\n" +
+                        "並且在你生日的當天主動與你傳訊，你會?", "#ff0");
+                        ChangeEvent(6);
+                        break;
+                }
+                UpdateUI();
+            }
 
         }
         // 各事件按鈕顯示切換
