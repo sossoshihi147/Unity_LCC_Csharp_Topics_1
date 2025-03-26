@@ -1,13 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEditor;
-using UnityEditor.Playables;
 using UnityEngine;
-using UnityEngine.SocialPlatforms;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 
 namespace OLIVER
@@ -52,6 +46,8 @@ namespace OLIVER
     /// </summary>
     public class GameMain : MonoBehaviour
     {
+        [SerializeField, Header("文字")]
+        private TMP_Text textMain;
         public GameObject[] normalButtons;                  // 平時的 4 個選項
         public GameObject[] specialButtons;                 // 特定年齡的 3 個選項
         public GameObject[] endButtons;                     // 結局畫面的 2 個選項
@@ -79,27 +75,26 @@ namespace OLIVER
         // 出生
         private void Born()
         {
-            LogSystem.LogWithColor("恭喜你終於破防了，精生也請多多指教!!", "#f0f");
             int randomStart = Random.Range(0, 4);
             if (randomStart == 0)
             {
                 stats = new CharacterStats(1, 0, 10, 120, 800,false);
-                LogSystem.LogWithColor("今世你出生在熱愛戶外活動的家庭", "#f99");
+                textMain.text = "<color=#f99>恭喜你終於破防了，精生也請多多指教!!\n今世你出生在熱愛戶外活動的家庭</color>";
             }
             if (randomStart == 1)
             {
                 stats = new CharacterStats(1, 5, 5, 100, 10000, false);
-                LogSystem.LogWithColor("今世你是大財團的三公子", "#f99");
+                textMain.text = "<color=#f99>恭喜你終於破防了，精生也請多多指教!!\n今世你是大財團的三公子</color>";
             }
             if (randomStart == 2)
             {
                 stats = new CharacterStats(1, 0, 0, 100, 500, false);
-                LogSystem.LogWithColor("今世你出生在一般的上班族家庭", "#f99");
+                textMain.text = "<color=#f99>恭喜你終於破防了，精生也請多多指教!!\n今世你出生在一般的上班族家庭</color>";
             }
             if (randomStart == 3)
             {
                 stats = new CharacterStats(1, 10, 0, 100, 1500, false);
-                LogSystem.LogWithColor("今世你出生電競世家", "#f99");
+                textMain.text = "<color=#f99>恭喜你終於破防了，精生也請多多指教!!\n今世你出生電競世家</color>";
             }
         }
         // 成長
@@ -121,11 +116,11 @@ namespace OLIVER
                     // 幼年時期
                     if (ageCheck < 1)
                     {
-                        LogSystem.LogWithColor("流著口水，聽著古典樂就成長了<<能力+2，金錢-80>>", "#f09");
+                        textMain.text = "<color=#f09>流著口水，聽著古典樂就成長了<<能力+2，金錢-80>></color>";
                     }
                     else if (ageCheck > 1 && ageCheck < 2 && ageCheck != 1)
                     {
-                        LogSystem.LogWithColor("在幼稚園捏泥巴，玩玩具就長大了<<能力+2，金錢-80>>", "#f09");
+                        textMain.text = "<color=#f09>在幼稚園捏泥巴，玩玩具就長大了<<能力+2，金錢-80>></color>";
                     }
                     if (ageCheck < 2 && ageCheck != 1)
                     {
@@ -138,11 +133,11 @@ namespace OLIVER
                     // 少年時期
                     if (ageCheck > 2 && ageCheck < 3)
                     {
-                        LogSystem.LogWithColor("九九乘法他悄悄地來，悄悄地走<<能力+3，金錢-120>>", "#f09");
+                        textMain.text = "<color=#f09>九九乘法他悄悄地來，悄悄地走<<能力+3，金錢-120>></color>";
                     }
                     else if (ageCheck > 3 && ageCheck < 4)
                     {
-                        LogSystem.LogWithColor("二元一次方程式，與我總如初相識<<能力+3，金錢-120>>", "#f09");
+                        textMain.text = "<color=#f09>二元一次方程式，與我總如初相識<<能力+3，金錢-120>></color>";
                     }
                     if (ageCheck > 2 && ageCheck < 4 && ageCheck != 3)
                     {
@@ -155,11 +150,11 @@ namespace OLIVER
                     // 青年時期
                     if (ageCheck > 4 && ageCheck < 5)
                     {
-                        LogSystem.LogWithColor("微積分有什麼難度，我都查危機百科<<能力+5，金錢-150>>", "#f09");
+                        textMain.text = "<color=#f09>微積分有什麼難度，我都查危機百科<<能力+5，金錢-150>></color>";
                     }
                     else if (ageCheck > 5 && ageCheck < 6)
                     {
-                        LogSystem.LogWithColor("咦?專題的完成進度，總是跟我的個人進度巧妙的吻合???<<能力+5，金錢-150>>", "#f09");
+                        textMain.text = "<color=#f09>咦?專題的完成進度，總是跟我的個人進度巧妙的吻合???<<能力+5，金錢-150>></color>";
                     }
                     if (ageCheck > 4 && ageCheck < 6 && ageCheck != 5)
                     {
@@ -172,11 +167,11 @@ namespace OLIVER
                     // 狀年時期
                     if (ageCheck > 6 && ageCheck < 7)
                     {
-                        LogSystem.LogWithColor("下班後還去聯成上C#課程，這樣置入有折扣嗎<<能力+7，社交+1，金錢-200>>", "#f09");
+                        textMain.text = "<color=#f09>下班後還去聯成上C#課程，這樣置入有折扣嗎<<能力+7，社交+1，金錢-200>></color>";
                     }
                     else if (ageCheck > 7 && ageCheck < 8)
                     {
-                        LogSystem.LogWithColor("C#上完接著上Unity，又置入啦，為什麼說又呢?<<能力+7，社交+1，金錢-200>>", "#f09");
+                        textMain.text = "<color=#f09>C#上完接著上Unity，又置入啦，為什麼說又呢?<<能力+7，社交+1，金錢-200>></color>";
                     }
                     if (ageCheck > 6 && ageCheck < 8 && ageCheck != 7)
                     {
@@ -191,11 +186,11 @@ namespace OLIVER
                     // 幼年時期
                     if (ageCheck < 1)
                     {
-                        LogSystem.LogWithColor("對著面前不知是哪位的大媽咯咯笑<<社交+2，金錢-100>>", "#f09");
+                        textMain.text = "<color=#f09>對著面前不知是哪位的大媽咯咯笑<<社交+2，金錢-100>></color>";
                     }
                     else if (ageCheck > 1 && ageCheck < 2 && ageCheck != 1)
                     {
-                        LogSystem.LogWithColor("逛街時，對路上的小姐姐眨眨眼<<社交+2，金錢-100>>", "#f09");
+                        textMain.text = "<color=#f09>逛街時，對路上的小姐姐眨眨眼<<社交+2，金錢-100>></color>";
                     }
                     if (ageCheck < 2 && ageCheck != 1)
                     {
@@ -208,11 +203,11 @@ namespace OLIVER
                     // 少年時期
                     if (ageCheck > 2 && ageCheck < 3)
                     {
-                        LogSystem.LogWithColor("揪同學到圖書館集合，玩傳說對決<<社交+3，金錢-150>>", "#f09");
+                        textMain.text = "<color=#f09>揪同學到圖書館集合，玩傳說對決<<社交+3，金錢-150>></color>";
                     }
                     else if (ageCheck > 3 && ageCheck < 4)
                     {
-                        LogSystem.LogWithColor("揪同學到陸鱷鯊集合，玩PTCG<<社交+3，金錢-150>>", "#f09");
+                        textMain.text = "<color=#f09>揪同學到陸鱷鯊集合，玩PTCG<<社交+3，金錢-150>></color>";
                     }
                     if (ageCheck > 2 && ageCheck < 4 && ageCheck != 3)
                     {
@@ -225,11 +220,11 @@ namespace OLIVER
                     // 青年時期
                     if (ageCheck > 4 && ageCheck < 5)
                     {
-                        LogSystem.LogWithColor("我們社團的宗旨是：智商少一半，快樂不間斷<<社交+5，金錢-180>>", "#f09");
+                        textMain.text = "<color=#f09>我們社團的宗旨是：智商少一半，快樂不間斷<<社交+5，金錢-180>></color>";
                     }
                     else if (ageCheck > 5 && ageCheck < 6)
                     {
-                        LogSystem.LogWithColor("約同學逛夜市，結果被夜市王的人潮擠爆了<<社交+5，金錢-180>>", "#f09");
+                        textMain.text = "<color=#f09>約同學逛夜市，結果被夜市王的人潮擠爆了<<社交+5，金錢-180>></color>";
                     }
                     if (ageCheck > 4 && ageCheck < 6 && ageCheck != 5)
                     {
@@ -242,11 +237,11 @@ namespace OLIVER
                     // 狀年時期
                     if (ageCheck > 6 && ageCheck < 7)
                     {
-                        LogSystem.LogWithColor("約同事一起聚餐，開始建立人脈了<<能力+1，社交+7，金錢-250>>", "#f09");
+                        textMain.text = "<color=#f09>約同事一起聚餐，開始建立人脈了<<能力+1，社交+7，金錢-250>></color>";
                     }
                     else if (ageCheck > 7 && ageCheck < 8)
                     {
-                        LogSystem.LogWithColor("去貓舍做義工，撸貓比人際關係輕鬆多了<<能力+1，社交+7，金錢-250>>", "#f09");
+                        textMain.text = "<color=#f09>去貓舍做義工，撸貓比人際關係輕鬆多了<<能力+1，社交+7，金錢-250>></color>";
                     }
                     if (ageCheck > 6 && ageCheck < 8 && ageCheck != 7)
                     {
@@ -261,11 +256,11 @@ namespace OLIVER
                     // 幼年時期
                     if (ageCheck < 1)
                     {
-                        LogSystem.LogWithColor("啃著沾有奶粉的手手被直播了<<能力+1，金錢+400>>", "#f09");
+                        textMain.text = "<color=#f09>啃著沾有奶粉的手手被直播了<<能力+1，金錢+400>></color>";
                     }
                     else if (ageCheck > 1 && ageCheck < 2 && ageCheck != 1)
                     {
-                        LogSystem.LogWithColor("過年時，對著爺爺奶奶輸出一頓小搥搥<<能力+1，金錢+400>>", "#f09");
+                        textMain.text = "<color=#f09>過年時，對著爺爺奶奶輸出一頓小搥搥<<能力+1，金錢+400>></color>";
                     }
                     if (ageCheck < 2 && ageCheck != 1)
                     {
@@ -278,11 +273,11 @@ namespace OLIVER
                     // 少年時期
                     if (ageCheck > 2 && ageCheck < 3)
                     {
-                        LogSystem.LogWithColor("幫爸爸出售Pokemon Ga-Ole的卡閘<<能力+1，社交+1，金錢+500>>", "#f09");
+                        textMain.text = "<color=#f09>幫爸爸出售Pokemon Ga-Ole的卡閘<<能力+1，社交+1，金錢+500>></color>";
                     }
                     else if (ageCheck > 3 && ageCheck < 4)
                     {
-                        LogSystem.LogWithColor("去阿姨的美食直播幫忙吃東西<<能力+1，社交+1，金錢+500>>", "#f09");
+                        textMain.text = "<color=#f09>去阿姨的美食直播幫忙吃東西<<能力+1，社交+1，金錢+500>></color>";
                     }
                     if (ageCheck > 2 && ageCheck < 4 && ageCheck != 3)
                     {
@@ -296,11 +291,11 @@ namespace OLIVER
                     // 青年時期
                     if (ageCheck > 4 && ageCheck < 5)
                     {
-                        LogSystem.LogWithColor("飲料店的時薪，居然不如我5歲的小搥搥<<能力+2，社交+1，金錢+800>>", "#f09");
+                        textMain.text = "<color=#f09>飲料店的時薪，居然不如我5歲的小搥搥<<能力+2，社交+1，金錢+800>></color>";
                     }
                     else if (ageCheck > 5 && ageCheck < 6)
                     {
-                        LogSystem.LogWithColor("到企業實習，主要工作是訂下午茶??<<能力+2，社交+1，金錢+800>>", "#f09");
+                        textMain.text = "<color=#f09>到企業實習，主要工作是訂下午茶??<<能力+2，社交+1，金錢+800>></color>";
                     }
                     if (ageCheck > 4 && ageCheck < 6 && ageCheck != 5)
                     {
@@ -314,11 +309,11 @@ namespace OLIVER
                     // 狀年時期
                     if (ageCheck > 6 && ageCheck < 7)
                     {
-                        LogSystem.LogWithColor("加班賣肝，老闆賺翻<<能力+3，健康-2，金錢+1000>>", "#f09");
+                        textMain.text = "<color=#f09>加班賣肝，老闆賺翻<<能力+3，健康-2，金錢+1000>></color>";
                     }
                     else if (ageCheck > 7 && ageCheck < 8)
                     {
-                        LogSystem.LogWithColor("與其把肝賣給公司，何不直接賣給醫院??<<能力+3，健康-2，金錢+1000>>", "#f09");
+                        textMain.text = "<color=#f09>與其把肝賣給公司，何不直接賣給醫院??<<能力+3，健康-2，金錢+1000>></color>";
                     }
                     if (ageCheck > 6 && ageCheck < 8 && ageCheck != 7)
                     {
@@ -620,9 +615,7 @@ namespace OLIVER
                     stats.ModifyStat("age", -1);
                     stats.ModifyStat("health", 1);
                     break;
-                case "EndGame":
-                    EditorApplication.isPlaying = false;
-                    break; 
+
                     #endregion
             }
             string eventCheck = eventName;
@@ -636,7 +629,7 @@ namespace OLIVER
                 float ageCheck2 = stats.age / 4;
                 if (ageCheck2 >= 7.75f)
                 {
-                    LogSystem.LogWithColor("-----結局啦~感謝你的遊玩-----", "#f64");
+                    textMain.text = "<color=#f64>-----結局啦~感謝你的遊玩-----</color>";
                     // 取得結局文本
                     string finalEnding = GetFinalEnding(stats.ability, stats.sociability, stats.health, stats.money);
                     Example(finalEnding);
@@ -646,39 +639,39 @@ namespace OLIVER
                 switch (ageCheck2)
                 {
                     case 1:
-                        LogSystem.LogWithColor("在幼兒園吃完點心，打了個飽嗝\n" +
-                        "突然面前出現一個黑洞並掉落一顆糖果\n包裝上的字有看沒有懂，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>在幼兒園吃完點心，打了個飽嗝\n" +
+                        "突然面前出現一個黑洞並掉落一顆糖果\n包裝上的字有看沒有懂，你會?</color>";
                         ChangeEvent(0);
                         break;
                     case 2:
-                        LogSystem.LogWithColor("在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
-                         "「公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?」", "#ff0");
-                        LogSystem.LogWithColor("仔細一看他的服裝配色與家裡的貓貓一般無二，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>在家午睡時夢見一位身著古裝的貓娘對你說:\n" +
+                         "[公子，我等待一位真心人的深情一吻已千年，您能否成全小女子?]" +
+                         "仔細一看他的服裝配色與家中的貓貓一般無二，你會?</color>";
                         ChangeEvent(1);
                         break;
                     case 3:
-                        LogSystem.LogWithColor("國小畢旅回來後，莫名生了一場大病，高燒住院\n" +
-                        "在病床上，迷迷糊糊中隱約聽見一股呼喚，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>國小畢旅回來後，莫名生了一場大病，高燒住院\n" +
+                        "在病床上，迷迷糊糊中隱約聽見一股呼喚，你會?</color>";
                         ChangeEvent(2);
                         break;
                     case 4:
-                        LogSystem.LogWithColor("今年元旦，爸媽興奮的告訴你要送你一份禮物\n" +
-                        "問你想不想出國，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>今年元旦，爸媽興奮的告訴你要送你一份禮物\n" +
+                        "問你想不想出國，你會?</color>";
                         ChangeEvent(3);
                         break;
                     case 5:
-                        LogSystem.LogWithColor("在打完球的回家的路上，赫然發現一隻受傷的小貓，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>在打完球的回家的路上，赫然發現一隻受傷的小貓，你會?</color>";
                         ChangeEvent(4);
                         break;
                     case 6:
-                        LogSystem.LogWithColor("和朋友外出旅行時，突然有個導演衝過來說:\n" +
-                        "「這位朋友，你的氣質太適合我們這場戲了!!請務必賞臉幫忙拜託。」", "#ff0");
-                        LogSystem.LogWithColor("看了下劇本，是個只有一句台詞的臥底砲灰，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>和朋友外出旅行時，突然有個導演衝過來說:\n" +
+                        "「這位朋友，你的氣質太適合我們這場戲了!!請務必賞臉幫忙拜託。」" +
+                        "看了下劇本，是個只有一句台詞的臥底砲灰，你會?</color>";
                         ChangeEvent(5);
                         break;
                     case 7:
-                        LogSystem.LogWithColor("某天，你發現你手機裡的AI助手越來越智能\n" +
-                        "並且在你生日的當天主動與你傳訊，你會?", "#ff0");
+                        textMain.text = "<color=#ff0>某天，你發現你手機裡的AI助手越來越智能\n" +
+                        "並且在你生日的當天主動與你傳訊，你會?</color>";
                         ChangeEvent(6);
                         break;
                 } 
